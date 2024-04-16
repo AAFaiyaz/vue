@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Class 3</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-full grid place-items-center">
+    <div id="app">
+      <section>
+        <h2 class="font-bold mb-2">Assignments</h2>
+        <ul>
+          <li>Finish Project <input type="checkbox" name="" id="" /></li>
+          <li>Read chapter 4 <input type="checkbox" name="" id="" /></li>
+          <li>Turn in homework <input type="checkbox" name="" id="" /></li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      let app = {
+        data() {
+          return {
+            assignments: [
+              { name: "Finish project", complete: false },
+              { name: "Read chapter 4", complete: false },
+              { name: "Turn in homework", complete: false },
+            ],
+          };
+        },
+      };
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
