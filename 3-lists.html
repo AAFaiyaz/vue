@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,12 +9,40 @@
   </head>
   <body class="h-full grid place-items-center">
     <div id="app">
-      <section>
-        <h2 class="font-bold mb-2">Assignments</h2>
+      <section v-show="inProgressedAssignments.length">
+        <h2 class="font-bold mb-2">In Progress</h2>
+
         <ul>
-          <li>Finish Project <input type="checkbox" name="" id="" /></li>
-          <li>Read chapter 4 <input type="checkbox" name="" id="" /></li>
-          <li>Turn in homework <input type="checkbox" name="" id="" /></li>
+          <!-- <li>Finish project <input type="checkbox" /></li>
+          <li>Read Chapter 4 <input type="checkbox" /></li>
+          <li>Turn in homework <input type="checkbox" /></li> -->
+          <li
+            v-for="assignement in inProgressedAssignments"
+            :key="assignement.id"
+          >
+            <label>
+              {{assignement.name}}
+              <input type="checkbox" v-model="assignement.complete" />
+            </label>
+          </li>
+        </ul>
+        <!-- <pre>
+          {{assignments}}
+        </pre> -->
+      </section>
+      <section v-show="completedAssignments.length" class="mt-8">
+        <h2 class="font-bold mb-2">Completed</h2>
+
+        <ul>
+          <!-- <li>Finish project <input type="checkbox" /></li>
+          <li>Read Chapter 4 <input type="checkbox" /></li>
+          <li>Turn in homework <input type="checkbox" /></li> -->
+          <li v-for="assignement in completedAssignments" :key="assignement.id">
+            <label>
+              {{assignement.name}}
+              <input type="checkbox" v-model="assignement.complete" />
+            </label>
+          </li>
         </ul>
       </section>
     </div>
@@ -24,11 +52,22 @@
         data() {
           return {
             assignments: [
-              { name: "Finish project", complete: false },
-              { name: "Read chapter 4", complete: false },
-              { name: "Turn in homework", complete: false },
+              { name: "Finish project", complete: false, id: 1 },
+              { name: "Read Chapter 4", complete: false, id: 2 },
+              { name: "Turn in homework", complete: false, id: 3 },
             ],
           };
+        },
+        computed: {
+          inProgressedAssignments() {
+            return this.assignments.filter(
+              (assignment) => !assignment.complete
+            );
+          },
+
+          completedAssignments() {
+            return this.assignments.filter((assignment) => assignment.complete);
+          },
         },
       };
       Vue.createApp(app).mount("#app");

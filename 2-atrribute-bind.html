@@ -27,7 +27,10 @@
   </head>
   <body>
     <div id="app">
-      <button :class="active ? 'text-red' : 'text-green'" @click="toggle">
+      <!-- <button :class="buttonClasses" v-on:click="toggle">Click Me</button> -->
+      <!-- v-bind for attribute shortcut :class
+      v-on:click event shortcut @click -->
+      <button :class="active ? 'text-red' : 'text-green'" v-on:click="toggle">
         Click Me
       </button>
     </div>
@@ -35,15 +38,33 @@
       Vue.createApp({
         data() {
           return {
+            // buttonClasses: "text-green",
             active: false,
           };
         },
+
         methods: {
           toggle() {
+            // this.buttonClasses = "text-red";
             this.active = !this.active;
           },
         },
       }).mount("#app");
+
+      // this commented versions is called options api
+      // Vue.createApp({
+      //   data() {
+      //     return {
+      //       buttonClasses: "text-green",
+      //     };
+      //   },
+
+      //   methods: {
+      //     toggle() {
+      //       alert("toggle");
+      //     },
+      //   },
+      // }).mount("#app");
     </script>
   </body>
 </html>
